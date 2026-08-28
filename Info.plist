@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!--
+	 A hand-written Info.plist (see the big comment further down for why)
+	 does NOT get these standard keys auto-injected the way
+	 GENERATE_INFOPLIST_FILE=YES's full synthesis does — omitting them built
+	 and ran fine in the Simulator (a plain `xcodebuild build` never
+	 actually installs/validates the bundle) but failed installing to a
+	 real device with "not a valid bundle... Ensure your Info.plist
+	 contains a value for CFBundleIdentifier". These five are the standard
+	 set every app bundle needs; the $(...) values are substituted from the
+	 matching build settings at build time, same as GENERATE_INFOPLIST_FILE
+	 would have filled them in.
+	-->
+	<key>CFBundleDevelopmentRegion</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(MARKETING_VERSION)</string>
+	<key>CFBundleVersion</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Luxgraph uses Bluetooth to discover and monitor Bluetooth MIDI devices.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Luxgraph uses the camera as a live source for the Camera generator node.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Luxgraph uses the microphone to drive audio-reactive visuals.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Luxgraph saves your recorded visuals to Photos.</string>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+	</array>
+	<key>UILaunchScreen</key>
+	<dict/>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<!--
+	 Hand-written (not auto-generated) specifically so the external-display
+	 scene role can be declared STATICALLY, not just returned dynamically
+	 from AppDelegate.application(_:configurationForConnecting:options:).
+	 Three earlier attempts relying purely on the dynamic method (with
+	 UIApplicationSupportsMultipleScenes correctly set to true, verified by
+	 inspecting the built Info.plist directly) still never had iOS offer
+	 anything but the UIWindowSceneSessionRoleApplication role to that
+	 method — confirmed via console logging on a real device connected over
+	 wired HDMI. That strongly suggests iOS decides which scene roles it
+	 will even ATTEMPT to connect from what's statically declared here,
+	 and only consults the dynamic method to configure/customize roles it
+	 already knows the app supports — not to introduce one from scratch.
+	 -->
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<true/>
+		<key>UISceneConfigurations</key>
+		<dict>
+			<key>UIWindowSceneSessionRoleApplication</key>
+			<array>
+				<dict>
+					<key>UISceneConfigurationName</key>
+					<string>Default Configuration</string>
+				</dict>
+			</array>
+			<key>UIWindowSceneSessionRoleExternalDisplayNonInteractive</key>
+			<array>
+				<dict>
+					<key>UISceneConfigurationName</key>
+					<string>External Display</string>
+					<key>UISceneDelegateClassName</key>
+					<string>$(PRODUCT_MODULE_NAME).ExternalDisplaySceneDelegate</string>
+				</dict>
+			</array>
+		</dict>
+	</dict>
+</dict>
+</plist>
