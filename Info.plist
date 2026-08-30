@@ -31,13 +31,19 @@
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>Luxgraph uses Bluetooth to discover and monitor Bluetooth MIDI devices.</string>
+	<string>Patchlume uses Bluetooth to discover and monitor Bluetooth MIDI devices.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Luxgraph uses the camera as a live source for the Camera generator node.</string>
+	<string>Patchlume uses the camera as a live source for the Camera generator node.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Luxgraph uses the microphone to drive audio-reactive visuals.</string>
+	<string>Patchlume uses the microphone to drive audio-reactive visuals.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Luxgraph saves your recorded visuals to Photos.</string>
+	<string>Patchlume saves your recorded visuals to Photos.</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Patchlume uses the local network to broadcast your live visuals as an NDI source to apps like OBS or Resolume.</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_ndi._tcp</string>
+	</array>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>

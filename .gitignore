@@ -8,3 +8,6 @@ DerivedData/
 *.ipa
 *.dSYM.zip
 *.dSYM
+
+# NDI SDK (vendored locally, not redistributed — see ThirdParty/NDI/README.md)
+ThirdParty/NDI/
